@@ -1,7 +1,7 @@
 <template>
-  <section class="w-full">
+  <section>
     <div>
-      <Nuxt />
+      <NuxtPage />
     </div>
   </section>
 </template>
