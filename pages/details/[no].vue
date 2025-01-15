@@ -10,35 +10,42 @@
         <div class="title">상품상세</div>
       </div>
     </div>
+    <div class="content-container no-scrollbar">
+      <img class="product-image" :src="ImgLunchbox" alt="Product Image" />
 
-    <img class="product-image" :src="ImgLunchbox" alt="Product Image" />
+      <div class="product-info">
+        <div class="brand-info">
+          <div class="text">Brand</div>
+          <div class="icon">
+            <IconRight />
+          </div>
+        </div>
+        <div class="product-details">{{ item.itemName }}<br />{{ item.sellPrice | thousandComma }}</div>
+      </div>
 
-    <div class="product-info">
-      <div class="brand-info">
-        <div class="text">Brand</div>
-        <div class="icon">
-          <IconRight />
+      <div class="card-container">
+        <SelectBox
+          v-for="(data, index) in selectBoxData"
+          :key="index"
+          :title="data.title"
+          :labels="data.labels"
+          :selected="data.selected"
+          @click="data.onClick"
+          @selected="data.onSelected"
+        />
+      </div>
+    </div>
+    <div class="cart-footer" :class="{ disabled: !isAllSelected }">
+      <div class="cart-footer-container" @click="onAddCart">
+        <div class="cart-footer-button-container">
+          <div class="cart-footer-button">
+            <div class="cart-footer-button-text">장바구니 담기</div>
+          </div>
         </div>
       </div>
-      <div class="product-details">{{ item.itemName }}<br />{{ item.sellPrice | thousandComma }}</div>
-    </div>
-
-    <div class="card-container">
-      <SelectBox
-        v-for="(data, index) in selectBoxData"
-        :key="index"
-        :title="data.title"
-        :labels="data.labels"
-        :selected="data.selected"
-        @click="data.onClick"
-        @selected="data.onSelected"
-      />
-    </div>
-    <div class="footer">
-      <div class="cart-button">
-        <span>장바구니 담기</span>
+      <div class="cart-footer-line-container">
+        <div class="footer-line"></div>
       </div>
-      <div class="footer-line"></div>
     </div>
   </div>
 </template>
@@ -84,6 +91,10 @@ const selectBoxData = computed(() => [
 
 const item = computed(() => ProductInfo.result.find(item => item.itemNo === Number(route.params.no)));
 
+const isAllSelected = computed(() => {
+  return Object.values(selectedData.value).every((value) => value !== null);
+});
+
 const onClickBack = () => router.back();
 
 const toggleHandler = (key) => {
@@ -93,6 +104,13 @@ const toggleHandler = (key) => {
 
 const selectHandler = (key, value) => {
   selectedData.value[key] = value;
+};
+
+const onAddCart = () => {
+  if (!isAllSelected.value) {
+    return;
+  }
+  router.push({ path: `/cart`, query: selectedData.value });
 };
 
 watch(
