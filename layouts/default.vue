@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  component: {},
+  component: {}
 };
 </script>
 
