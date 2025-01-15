@@ -31,7 +31,7 @@
       <div class="required-mark">*</div>
     </div>
     <div class="size-selector-container" @click="onClick">
-      <div class="size-selector-text">선택</div>
+      <div class="size-selector-text">{{ selectedValue || '선택' }}</div>
       <div class="size-selector-icon">
         <div class="icon-inner">
           <IconArrowDown />
@@ -43,11 +43,11 @@
   <div v-if="selected" class="size-options-container">
     <div
       class="size-option"
-      v-for="label in labels"
+      v-for="label in props.labels"
       :key="label"
-      @click="selectOption(label)"
+      @click="onSelected(label)"
     >
-      <div class="size-option-text">{{ label }}</div>
+      <div class="size-option-text">{{ label?.value || label }} {{ label?.isSoldout ? '(품절)' : '' }}</div>
     </div>
   </div>
 </template>
@@ -68,10 +68,21 @@ const props = defineProps({
     }
 });
 
-const emit = defineEmits(['click']);
+const emit = defineEmits(['click', 'selected']);
+
+const selectedValue = ref('');
 
 const onClick = (e) => {
   emit('click', props.selected);
+};
+
+const onSelected = (label) => {
+  if (label?.isSoldout) {
+    return;
+  }
+  selectedValue.value = label?.value || label;
+  emit('click', props.selected);
+  emit('selected', label);
 };
 </script>
 
@@ -97,7 +108,7 @@ const onClick = (e) => {
 }
 
 .size-selector-text {
-  @apply grow shrink basis-0 h-6 justify-between items-center flex;
+  @apply grow shrink basis-0 h-6 justify-between items-center flex cursor-pointer;
   font-size: 13px;
 }
 
@@ -110,7 +121,7 @@ const onClick = (e) => {
 }
 
 .size-options-container {
-  @apply h-[102px] px-2 py-1.5 bg-white rounded shadow-[0px_1px_10px_0px_rgba(0,0,0,0.25)] flex-col justify-start items-start flex w-full;
+  @apply h-[102px] px-2 py-1.5 bg-white rounded shadow-[0px_1px_10px_0px_rgba(0,0,0,0.25)] flex-col justify-start items-start flex w-full cursor-pointer;
 }
 
 .size-option {
