@@ -20,13 +20,13 @@
           <IconRight />
         </div>
       </div>
-      <div class="product-details">클래식 런치박스<br />75,000</div>
+      <div class="product-details">{{ item.itemName }}<br />{{ item.sellPrice | thousandComma }}</div>
     </div>
 
     <div class="card-container">
       <SelectBox
         :title="'사이즈'"
-        :labels="sizeLabels"
+        :labels="item.sizeLabels"
         :selected="sizeToggle"
         @click="onSizeClick"
       >
@@ -48,10 +48,7 @@ import { ref, computed } from 'vue';
 import IconChevronLeft from "assets/icons/ic-chevron-left.svg";
 import ImgLunchbox from "assets/images/lunchbox.png";
 import IconRight from "assets/icons/ic-arrow-right.svg";
-
-const sizeLabels = computed(() => {
-  return ['1', '2']
-});
+import item from "@/data/products.js";
 
 const sizeToggle = ref(false);
 
