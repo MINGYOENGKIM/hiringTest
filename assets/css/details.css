@@ -17,11 +17,11 @@
 }
 
 .header-title {
-  @apply flex justify-center;
+  @apply justify-start items-center gap-1 inline-flex overflow-hidden;
 }
 
 .title {
-  @apply text-black text-[14px] font-bold font-['Pretendard'] leading-normal;
+  @apply text-center text-black text-lg font-bold font-['Pretendard'] leading-normal;
 }
 
 .content-container {

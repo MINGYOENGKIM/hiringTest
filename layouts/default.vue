@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div>
+    <div class="bg-[#f4f4f4]">
       <NuxtPage />
     </div>
   </section>
