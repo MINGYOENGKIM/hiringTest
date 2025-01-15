@@ -1,0 +1,78 @@
+/* 전체 페이지 스타일 */
+.product-detail-page {
+  @apply mx-auto w-[390px] h-[844px] bg-white flex flex-col overflow-hidden;
+}
+
+/* 헤더 스타일 */
+.header {
+  @apply flex justify-between pr-[162px] items-center h-[60px];
+}
+
+.header-left {
+  @apply flex pl-[18px];
+}
+
+.back-button {
+  @apply flex justify-center items-center w-[26px] h-[26px];
+}
+
+.header-title {
+  @apply flex justify-center;
+}
+
+.title {
+  @apply text-black text-[14px] font-bold font-['Pretendard'] leading-normal;
+}
+
+/* 이미지 섹션 */
+.product-image {
+  @apply w-[390px] h-[390px] object-cover;
+}
+
+/* 상품 정보 */
+.product-info {
+  @apply w-[390px] h-[104px] px-5 pt-5 pb-2.5 flex-col justify-start items-start gap-2.5 inline-flex;
+}
+
+/* header-container */
+.brand-info {
+  @apply justify-center items-center gap-0.5 inline-flex;
+}
+
+/* brand-text */
+.brand-info .text {
+  @apply text-center text-[#474747] text-sm font-medium font-['Pretendard'] leading-tight;
+}
+
+/* icon-container */
+.brand-info .icon {
+  @apply w-3.5 h-3.5 pl-[4.34px] pr-1 py-0.5 justify-center items-center flex overflow-hidden;
+}
+
+/* product-details */
+.product-details {
+  @apply self-stretch text-black text-base font-medium font-['Pretendard'] leading-snug;
+}
+
+
+/* 옵션 섹션 */
+.card-container {
+  @apply w-[390px] h-[394px] px-4 pt-2.5 pb-5 flex-col justify-start items-start gap-1.5 inline-flex overflow-hidden;
+}
+
+/* 푸터 스타일 */
+.footer {
+  @apply h-[89px] bg-white flex flex-col justify-start items-start;
+}
+
+.cart-button {
+  @apply h-[52px] bg-[#f4f4f4] flex justify-center items-center;
+}
+
+.cart-button span {
+  @apply text-[#c4c4c4] text-sm font-bold;
+}
+
+.footer-line {
+  @apply w-[139px] h-[5px] bg-black rounded-full mx-auto mt-[10px];
+}
