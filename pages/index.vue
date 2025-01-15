@@ -1,10 +1,11 @@
 <template>
-  <div class="pt-2 bg-[#e4e4e4]">
-    <div
-      v-for="product in productList"
-      :key="product"
-    >
-      <Products :product="product"></Products>
+  <div class="index-container">
+    <div class="products-grid">
+      <Products
+        v-for="product in productList"
+        :key="product.itemId"
+        :product="product"
+      />
     </div>
   </div>
 </template>
@@ -20,4 +21,12 @@ const productList = computed(() => {
 
 </script>
 
-<style></style>
+<style scoped>
+.index-container {
+  @apply pt-2 bg-gray-200;
+}
+
+.products-grid {
+  @apply mx-auto w-[390px] h-[844px] grid grid-cols-2 gap-4 p-4 bg-white;
+}
+</style>

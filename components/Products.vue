@@ -3,32 +3,31 @@
     <div class="product">
       <div class="product-border"></div>
       <div class="content">
-        <div class="image">
+        <div class="image" @click="onClick">
           <div class="image-inner">
             <div class="rotated-border">
               <img :src="product.itemImage.imageUrl" />
             </div>
           </div>
-          <div class="label">
-            <div class="label-text">이굿위크</div>
-          </div>
-          <div class="icon">
-            <div class="icon-inner"></div>
-          </div>
         </div>
         <div class="details">
           <div class="brand">
-            <div class="brand-name">브랜드명</div>
-            <div class="brand-icon"></div>
-          </div>
-          <div class="description">
-            <div class="description-text">{{ product.itemName }}</div>
-            <div class="price">
-              <div class="discount">{{ product.discountRate }}%</div>
-              <div class="final-price">{{ product.sellPrice | thousandComma }}</div>
+            <div class="brand-name h-4 justify-start items-center gap-0.5 inline-flex">
+              <div class="text-center text-black text-xs font-bold font-['Pretendard'] leading-none">브랜드명</div>
+              <div class="brand-arrow w-3 h-3 pl-[3.65px] pr-[3.29px] py-[1.65px] justify-center items-center flex overflow-hidden">
+                <IconRight />
+              </div>
             </div>
           </div>
-          <div class="gap"></div>
+          <div class="description" @click="onClick">
+            <div class="description-text">{{ product.itemName }}</div>
+            <div class="price">
+              <div class="price-row">
+                <div class="discount">{{ product.discountRate }}%</div>
+                <div class="final-price">{{ product.sellPrice | thousandComma }}</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -37,24 +36,26 @@
 
 <script setup>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import IconRight from "assets/icons/ic-arrow-right.svg";
 
 const props = defineProps({
   product: Object
 });
 
-const sizeToggle = ref(false);
+const router = useRouter();
 
-const onSizeClick = (toggle) => {
-  sizeToggle.value = !toggle;
+const onClick = (e) => {
+  router.push({ path: `/details/${props.product?.itemNo}` });
 };
 </script>
 <style scoped>
 .products-container {
-  @apply flex flex-wrap mx-auto w-[390px] h-[844px] bg-white gap-4 justify-between overflow-hidden;
+  @apply flex flex-wrap mx-auto w-full bg-white gap-4 justify-between overflow-hidden;
 }
 
 .product {
-  @apply w-[47%] h-[327px] relative; /* Adjust width for two items in a row */
+  @apply w-full h-full relative;
 }
 
 .product .product-border {
@@ -62,11 +63,11 @@ const onSizeClick = (toggle) => {
 }
 
 .content {
-  @apply h-full left-0 top-0 absolute flex-col justify-center items-start gap-2.5 inline-flex;
+  @apply h-full left-0 top-0 absolute flex-col justify-center items-start gap-2.5;
 }
 
 .image {
-  @apply self-stretch h-[195px] justify-start items-center gap-2.5 inline-flex overflow-hidden;
+  @apply self-stretch justify-start items-center gap-2.5 inline overflow-hidden cursor-pointer;
 }
 
 .image-inner {
@@ -74,7 +75,7 @@ const onSizeClick = (toggle) => {
 }
 
 .rotated-border {
-  @apply self-stretch h-[195px] origin-top-left -rotate-45 justify-start items-start inline-flex;
+  @apply self-stretch w-full h-full origin-top-left justify-start items-start inline-flex;
 }
 
 .label {
@@ -94,23 +95,23 @@ const onSizeClick = (toggle) => {
 }
 
 .details {
-  @apply self-stretch h-[122px] px-2.5 pb-5 flex-col justify-start items-start gap-2 inline-flex;
+  @apply self-stretch px-2.5 pb-2.5 flex-col justify-start items-start gap-2 inline-flex;
 }
 
 .brand {
-  @apply self-stretch h-20 flex-col justify-start items-start gap-0.5 flex;
+  @apply self-stretch justify-start items-start gap-0.5 flex;
 }
 
 .brand-name {
-  @apply self-stretch h-6 py-1 rounded-sm flex-col justify-center items-start gap-2.5 flex;
+  @apply self-stretch flex items-center;
 }
 
 .brand-icon {
-  @apply w-3 h-3 pl-[3.65px] pr-[3.29px] py-[1.65px] justify-center items-center flex overflow-hidden;
+  @apply w-4 h-4 pl-[3.65px] pr-[3.29px] py-[1.65px] justify-center items-center overflow-hidden;
 }
 
 .description {
-  @apply self-stretch h-[54px] flex-col justify-start items-start gap-0.5 flex;
+  @apply self-stretch flex-col justify-start items-start gap-0.5 flex cursor-pointer;
 }
 
 .description-text {
@@ -119,6 +120,10 @@ const onSizeClick = (toggle) => {
 
 .price {
   @apply self-stretch h-5 flex-col justify-start items-start gap-0.5 flex;
+}
+
+.price-row {
+  @apply flex items-center gap-2;
 }
 
 .discount {
