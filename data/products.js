@@ -1,3 +1,38 @@
+const optionInfo = {
+  "L - 대형": {
+      "color": [
+          {"value": "Teal", "isSoldout": false},
+          {"value": "Black", "isSoldout": true},
+          {"value": "White", "isSoldout": false}
+      ],
+      "option": [
+          {"value": "선택안함", "isSoldout": false},
+          {"value": "선물포장 (2,000원)", "isSoldout": false}
+      ]
+  },
+  "M - 중형": {
+      "color": [
+          {"value": "Teal", "isSoldout": false},
+          {"value": "Black", "isSoldout": false},
+          {"value": "White", "isSoldout": false}
+      ],
+      "option": [
+          {"value": "선택안함", "isSoldout": false},
+          {"value": "선물포장 (2,000원)", "isSoldout": false}
+      ]
+  },
+  "S - 소형": {
+      "color": [
+          {"value": "Teal", "isSoldout": false},
+          {"value": "Black", "isSoldout": false},
+          {"value": "White", "isSoldout": false}
+      ],
+      "option": [
+          {"value": "선택안함", "isSoldout": false},
+          {"value": "선물포장 (2,000원)", "isSoldout": false}
+      ]
+  }
+};
 
 const detailsInfo = {
   "status": "SUCCESS",
@@ -14,41 +49,7 @@ const detailsInfo = {
     "consumerPrice": 45500,
     "discountRate": 5,
     "isSoldout": false,
-    "options": {
-      "L - 대형": {
-          "color": [
-              {"value": "Teal", "isSoldout": false},
-              {"value": "Black", "isSoldout": true},
-              {"value": "White", "isSoldout": false}
-          ],
-          "option": [
-              {"value": "선택안함", "isSoldout": false},
-              {"value": "선물포장 (2,000원)", "isSoldout": false}
-          ]
-      },
-      "M - 중형": {
-          "color": [
-              {"value": "Teal", "isSoldout": false},
-              {"value": "Black", "isSoldout": false},
-              {"value": "White", "isSoldout": false}
-          ],
-          "option": [
-              {"value": "선택안함", "isSoldout": false},
-              {"value": "선물포장 (2,000원)", "isSoldout": false}
-          ]
-      },
-      "S - 소형": {
-          "color": [
-              {"value": "Teal", "isSoldout": false},
-              {"value": "Black", "isSoldout": false},
-              {"value": "White", "isSoldout": false}
-          ],
-          "option": [
-              {"value": "선택안함", "isSoldout": false},
-              {"value": "선물포장 (2,000원)", "isSoldout": false}
-          ]
-      }
-    }
+    "options": optionInfo
   }, {
     "itemImage": {
         "imageHeight": 1080,
@@ -61,7 +62,8 @@ const detailsInfo = {
     "sellPrice": 43200,
     "consumerPrice": 45500,
     "discountRate": 5,
-    "isSoldout": false
+    "isSoldout": false,
+    "options": optionInfo
   }, {
     "itemImage": {
         "imageHeight": 1080,
@@ -74,7 +76,8 @@ const detailsInfo = {
     "sellPrice": 43200,
     "consumerPrice": 45500,
     "discountRate": 5,
-    "isSoldout": false
+    "isSoldout": false,
+    "options": optionInfo
   }, {
     "itemImage": {
         "imageHeight": 1080,
@@ -87,7 +90,8 @@ const detailsInfo = {
     "sellPrice": 43200,
     "consumerPrice": 45500,
     "discountRate": 5,
-    "isSoldout": false
+    "isSoldout": false,
+    "options": optionInfo
   }, {
     "itemImage": {
         "imageHeight": 1080,
@@ -100,7 +104,8 @@ const detailsInfo = {
     "sellPrice": 43200,
     "consumerPrice": 45500,
     "discountRate": 5,
-    "isSoldout": false
+    "isSoldout": false,
+    "options": optionInfo
   }, {
     "itemImage": {
         "imageHeight": 1080,
@@ -113,7 +118,8 @@ const detailsInfo = {
     "sellPrice": 43200,
     "consumerPrice": 45500,
     "discountRate": 5,
-    "isSoldout": false
+    "isSoldout": false,
+    "options": optionInfo
   }],
   "message": null,
   "errorCode": null

@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="content-container no-scrollbar">
-      <img class="product-image" :src="ImgLunchbox" alt="Product Image" />
+      <img class="product-image" :src="item.itemImage.imageUrl" alt="Product Image" />
 
       <div class="product-info">
         <div class="brand-info">
@@ -20,7 +20,7 @@
             <IconRight />
           </div>
         </div>
-        <div class="product-details">{{ item.itemName }}<br />{{ item.sellPrice | thousandComma }}</div>
+        <div class="product-details">{{ item.itemName }}<br />{{ useThousandComma(item.sellPrice) }}</div>
       </div>
 
       <div class="card-container">
@@ -53,13 +53,15 @@
 <script setup>
 import { ref, computed, watch, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import { useCartStore } from '@/store';
+import { useThousandComma } from '@/composable';
 import IconChevronLeft from "assets/icons/ic-chevron-left.svg";
-import ImgLunchbox from "assets/images/lunchbox.png";
 import IconRight from "assets/icons/ic-arrow-right.svg";
 import ProductInfo from "@/data/products.js";
 
 const route = useRoute();
 const router = useRouter();
+const cartStore = useCartStore();
 
 const toggles = ref({ size: false, color: false, option: false });
 const selectedData = ref({ size: null, color: null, option: null });
@@ -98,7 +100,6 @@ const isAllSelected = computed(() => {
 const onClickBack = () => router.back();
 
 const toggleHandler = (key) => {
-  console.log(key)
   toggles.value[key] = !toggles.value[key];
 };
 
@@ -110,7 +111,36 @@ const onAddCart = () => {
   if (!isAllSelected.value) {
     return;
   }
-  router.push({ path: `/cart`, query: selectedData.value });
+  const selectedItem = {
+    ...item.value,
+    ...selectedData.value
+  };
+  const findIndex = existProductIndex(selectedItem);
+  if (findIndex > -1) {
+    cartStore.productList[findIndex].quantity += 1;
+  } else {
+    selectedItem.quantity = 1;
+    cartStore.addProductList(selectedItem);
+  }
+  router.push({ path: `/cart` });
+};
+
+const existProductIndex = (selectedItem) => {
+  const { index: existingProductIndex } = cartStore.productList.reduce(
+    (acc, product, idx) => {
+      if (
+        product.itemName === selectedItem.itemName &&
+        product.size === selectedItem.size &&
+        product.color === selectedItem.color &&
+        product.option === selectedItem.option
+      ) {
+        acc = { index: idx, product };
+      }
+      return acc;
+    },
+    { index: -1, product: null } // 초기값
+  );
+  return existingProductIndex;
 };
 
 watch(

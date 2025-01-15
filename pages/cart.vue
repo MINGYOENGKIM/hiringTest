@@ -25,7 +25,10 @@
           <div class="grow shrink basis-0 text-center text-black text-[11px] font-normal font-['Pretendard'] leading-[14.96px]">선택삭제</div>
         </div>
       </div>
-      <CartItem />
+      <CartItem
+        v-for="(product, index) in productList"
+        :key="index"
+        :product="product" />
     </div>
     <div class="h-[89px] left-0 top-[755px] absolute bg-white flex-col justify-start items-start inline-flex">
       <div class="self-stretch h-[68px] px-4 py-2 bg-white border-t border-[#f4f4f4] flex-col justify-start items-start gap-2.5 flex overflow-hidden">
@@ -48,8 +51,17 @@
 
 <script setup>
 import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
+import { useCartStore } from '@/store';
 import IconChevronLeft from "assets/icons/ic-chevron-left.svg";
 import IconArrowChecked from "assets/images/ic-arrow-checked.png";
+
+const router = useRouter();
+const cartStore = useCartStore();
+
+const productList = computed(() => cartStore.productList);
+
+const onClickBack = () => router.back();
 
 </script>
 

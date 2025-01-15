@@ -24,7 +24,7 @@
             <div class="price">
               <div class="price-row">
                 <div class="discount">{{ product.discountRate }}%</div>
-                <div class="final-price">{{ product.sellPrice | thousandComma }}</div>
+                <div class="final-price">{{ useThousandComma(product.sellPrice) }}</div>
               </div>
             </div>
           </div>
@@ -37,6 +37,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { useThousandComma } from '@/composable';
 import IconRight from "assets/icons/ic-arrow-right.svg";
 
 const props = defineProps({
